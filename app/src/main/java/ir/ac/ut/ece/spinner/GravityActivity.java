@@ -120,12 +120,12 @@ public class GravityActivity extends AppCompatActivity implements SensorEventLis
             yPos -= yS;
         }
 
-        if (xPos >= xMax) {
-            xPos = xMax;
-            xVel = 0;
-        } else if (xPos <= 0) {
-            xPos = 0;
-            xVel = 0;
+        if (yPos >= yMax) {
+            yPos = yMax;
+            yVel = 0;
+        } else if (yPos <= 0) {
+            yPos = 0;
+            yVel = 0;
         }
     }
 }
