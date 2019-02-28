@@ -4,56 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GyroscopeActivity">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose a mode:"
+        android:text="Gyroscope Mode"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469" />
-
-    <TextView
-        android:id="@+id/game_title"
-        android:layout_width="288dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="70dp"
-        android:text="Spinner Game"
-        android:textAlignment="center"
-        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_gyroscope"
+    <TextView
+        android:id="@+id/xTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:onClick="onGyroscopeSelect"
-        android:text="Gyroscope"
-        android:textAlignment="center"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button_gravity"
+    <TextView
+        android:id="@+id/yTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onGravitySelect"
-        android:text="Gravity"
-        android:textAlignment="center"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_gyroscope" />
+        app:layout_constraintTop_toBottomOf="@+id/xTextView" />
+
+    <TextView
+        android:id="@+id/zTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yTextView" />
 
 </android.support.constraint.ConstraintLayout>
