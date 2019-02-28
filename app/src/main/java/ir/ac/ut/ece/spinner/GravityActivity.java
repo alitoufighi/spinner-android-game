@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class GravityActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +20,45 @@ public class GravityActivity extends AppCompatActivity implements SensorEventLis
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         setContentView(R.layout.activity_gravity);
+        tv = (TextView) findViewById(R.id.tv);
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        /*register the sensor listener to listen to the gyroscope sensor, use the
+        callbacks defined in this class, and gather the sensor information as quick
+        as possible*/
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY),SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    //When this Activity isn't visible anymore
+    @Override
+    protected void onStop()
+    {
+        //unregister the sensor listener
+        sensorManager.unregisterListener(this);
+        super.onStop();
     }
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-
+    public void onAccuracyChanged(Sensor arg0, int arg1)
+    {
+        //Do nothing.
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    public void onSensorChanged(SensorEvent event)
+    {
+        //if sensor is unreliable, return void
+        if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE)
+        {
+            return;
+        }
 
+        //else it will output the Roll, Pitch and Yawn values
+        tv.setText("Gravity Force X (m/s^2): "+ Float.toString(event.values[0]) +"\n"+
+                "Gravity Force Y (m/s^2): "+ Float.toString(event.values[1]) +"\n"+
+                "Gravity Force Z (m/s^2): "+ Float.toString(event.values[2]));
     }
 }

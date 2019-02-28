@@ -57,8 +57,8 @@ public class GyroscopeActivity extends AppCompatActivity implements SensorEventL
         }
 
         //else it will output the Roll, Pitch and Yawn values
-        tv.setText("Orientation X (Roll) :"+ Float.toString(event.values[2]) +"\n"+
-                "Orientation Y (Pitch) :"+ Float.toString(event.values[1]) +"\n"+
-                "Orientation Z (Yaw) :"+ Float.toString(event.values[0]));
+        tv.setText("Orientation X (rad/s): "+ Float.toString(event.values[0]) +"\n"+
+                "Orientation Y (rad/s): "+ Float.toString(event.values[1]) +"\n"+
+                "Orientation Z (rad/s): "+ Float.toString(event.values[2]));
     }
 }
