@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GyroscopeActivity" />
-        <activity android:name=".GravityActivity"></activity>
+        <activity android:name=".GyroscopeActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".GravityActivity" android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
