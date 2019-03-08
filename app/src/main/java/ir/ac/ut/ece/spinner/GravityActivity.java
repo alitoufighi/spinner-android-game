@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -118,6 +119,22 @@ public class GravityActivity
         ballImage.setY(yPos);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.resetValues();
+        return super.onTouchEvent(event);
+    }
+
+    private void resetValues() {
+        xPos = 0.0f;
+        xAccel = 0.0f;
+        xVel = 0.0f;
+        yPos = 0.0f;
+        yAccel = 0.0f;
+        yVel = 0.0f;
+        ballImage.setX(xPos);
+        ballImage.setY(yPos);
+    }
 
     private void updateBall() {
         float frameTime = 0.25f;
