@@ -121,7 +121,7 @@ public class GravityActivity
 
     private void updateBall() {
         float frameTime = 0.25f;
-        float gravity = 9.81f;
+        float gravity = SensorManager.STANDARD_GRAVITY;
         float xAngle = (float) Math.asin(xAccel / gravity);
         float yAngle = (float) Math.asin(yAccel / gravity);
         System.out.println("X ANGLE:" + Float.toString(xAngle) +
