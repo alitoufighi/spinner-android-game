@@ -24,6 +24,7 @@ public class GravityActivity
     private float xPos, xVel, xAccel;
     private float yPos, yVel, yAccel;
     private float xMax, yMax;
+    private static final float uS = 0.15f, uK = 0.10f;
     private ImageView ballImage;
 
     @Override
@@ -131,16 +132,16 @@ public class GravityActivity
         float yN = (float) (ballWeight * gravity * Math.cos(yAngle));
 
         if(xVel == 0) {
-            if(Math.abs(ballWeight * xAccel) >= Math.abs(xN * 0.15f)) {
+            if(Math.abs(ballWeight * xAccel) >= Math.abs(xN * uS)) {
                 xVel += (xAccel * frameTime);
                 float xS = (float) (xAccel * Math.pow(frameTime, 2) / 2 + xVel * frameTime);
                 xPos -= xS;
             }
         } else {
             if(xVel > 0)
-                xAccel -= ballWeight / (0.1f * xN);
+                xAccel -= ballWeight / (uK * xN);
             else
-                xAccel += ballWeight / (0.1f * xN);
+                xAccel += ballWeight / (uK * xN);
             xVel += (xAccel * frameTime);
             float xS = (float) (xAccel * Math.pow(frameTime, 2) / 2 + xVel * frameTime);
             xPos -= xS;
@@ -155,16 +156,16 @@ public class GravityActivity
         }
 
         if(yVel == 0) {
-            if(Math.abs(ballWeight * yAccel) >= Math.abs(yN * 0.15f)) {
+            if(Math.abs(ballWeight * yAccel) >= Math.abs(yN * uS)) {
                 yVel += (yAccel * frameTime);
                 float yS = (float) (yAccel * Math.pow(frameTime, 2) / 2 + yVel * frameTime);
                 yPos -= yS;
             }
         } else {
             if(yVel > 0)
-                yAccel -= ballWeight / (0.1f * yN);
+                yAccel -= ballWeight / (uK * yN);
             else
-                yAccel += ballWeight / (0.1f * yN);
+                yAccel += ballWeight / (uK * yN);
             yVel += (yAccel * frameTime);
             float yS = (float) (yAccel * Math.pow(frameTime, 2) / 2 + yVel * frameTime);
             yPos -= yS;
