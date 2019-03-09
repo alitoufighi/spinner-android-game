@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.Window;
@@ -15,12 +16,14 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GravityActivity
         extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor sensor;
-    private double samplingRate = 0.04;
+    private float timestamp;
+//    private double samplingRate = 0.04;
     private static final double ballWeight = 0.01;
     private float xPos, xVel, xAccel;
     private float yPos, yVel, yAccel;
@@ -66,7 +69,7 @@ public class GravityActivity
         getSensorList();
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -110,13 +113,13 @@ public class GravityActivity
     {
         if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE)
             return;
-        System.out.println("SENSOR CHANGED");
 
         xAccel = event.values[0];
         yAccel = -event.values[1];
         updateBall();
         ballImage.setX(xPos);
         ballImage.setY(yPos);
+        timestamp = event.timestamp;
     }
 
     @Override
@@ -137,6 +140,8 @@ public class GravityActivity
     }
 
     private void updateBall() {
+        if(timestamp == 0)
+            return;
         float frameTime = 0.25f;
         float gravity = SensorManager.STANDARD_GRAVITY;
         float xAngle = (float) Math.asin(xAccel / gravity);
@@ -147,6 +152,7 @@ public class GravityActivity
                 "Y VEL: " + Float.toString(yVel));
         float xN = (float) (ballWeight * gravity * Math.cos(xAngle));
         float yN = (float) (ballWeight * gravity * Math.cos(yAngle));
+        Log.d("FRICTION", "----XN: " + xN + " YN: " + yN);
 
         if(xVel == 0) {
             if(Math.abs(ballWeight * xAccel) >= Math.abs(xN * uS)) {
