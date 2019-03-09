@@ -109,10 +109,11 @@ public class GyroscopeActivity extends AppCompatActivity implements SensorEventL
 //        if(Math.abs(xW) > 0.004 && Math.abs(yW) > 0.004){
             final float dT = (event.timestamp - timestamp) * NS2S;
             updateBall(dT);
-            timestamp = event.timestamp;
+
 //        }
         ballImage.setX(xPos);
         ballImage.setY(yPos);
+        timestamp = event.timestamp;
     }
 
     private void resetValues() {
@@ -147,10 +148,12 @@ public class GyroscopeActivity extends AppCompatActivity implements SensorEventL
         float xDeltaTheta = xW * dT;
         float yDeltaTheta = yW * dT;
 
-//        if(Math.abs(xW) > 0.004 && Math.abs(yW) > 0.004){
+        if(Math.abs(xW) > 0.004){
             xTheta += xDeltaTheta;
+        }
+        if(Math.abs(yW) > 0.004) {
             yTheta += yDeltaTheta;
-//        }
+        }
 
         xAccel = gravity * (float) Math.sin(xTheta);
         yAccel = gravity * (float) Math.sin(yTheta);
