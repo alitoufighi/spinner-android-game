@@ -49,17 +49,18 @@ public class GyroscopeActivity
         ballImage = findViewById(R.id.ballImage);
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
-        ballImage.setX(size.x / 2f);
-        ballImage.setY(size.y / 2f);
+        ballImage.setX(0);
+        ballImage.setY(0);
 
-        float xMax = size.x - ballImage.getWidth();
-        float yMax = size.y - ballImage.getHeight();
+        float xMax = size.x - 250;
+        float yMax = size.y - 250;
         spinnerPhysicsAssitant = new SpinnerPhysicsAssistantGyroscope(xMax, yMax);
     }
 
     @Override
     protected void onStop(){
         sensorManager.unregisterListener(this);
+        spinnerPhysicsAssitant.resetValues();
         super.onStop();
     }
 

@@ -8,6 +8,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -64,19 +65,19 @@ public class GravityActivity
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         if(sensor == null)
             System.out.println("NULL SENSOR");
-        setContentView(R.layout.activity_gyroscope);
+        setContentView(R.layout.activity_gravity);
 
         ballImage = findViewById(R.id.ballImage);
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
-        ballImage.setX(size.x / 2f);
-        ballImage.setY(size.y / 2f);
+        ballImage.setX(0);
+        ballImage.setY(0);
 
-        float xMax = size.x - ballImage.getWidth();
-        float yMax = size.y - ballImage.getHeight();
+        float xMax = size.x - 250;
+        float yMax = size.y - 250;
         spinnerPhysicsAssitant = new SpinnerPhysicsAssistant(xMax, yMax);
     }
 
@@ -111,75 +112,4 @@ public class GravityActivity
         return super.onTouchEvent(event);
     }
 
-//    private float metersToPixels(float m) {
-//        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN,
-//                m * 39.3701f, getResources().getDisplayMetrics());
-//    }
-
-//    private void updateBall() {
-//        if(timestamp == 0)
-//            return;
-//        float frameTime = 0.25f;
-//        float gravity = SensorManager.STANDARD_GRAVITY;
-//        float xAngle = (float) Math.asin(xAccel / gravity);
-//        float yAngle = (float) Math.asin(yAccel / gravity);
-//        System.out.println("X ANGLE:" + Float.toString(xAngle) +
-//                "X VEL: " + Float.toString(xVel));
-//        System.out.println("Y ANGLE:" + Float.toString(yAngle) +
-//                "Y VEL: " + Float.toString(yVel));
-//        float xN = (float) (ballWeight * gravity * Math.cos(xAngle));
-//        float yN = (float) (ballWeight * gravity * Math.cos(yAngle));
-//        Log.d("FRICTION", "----XN: " + xN + " YN: " + yN);
-//
-//        if(xVel == 0) {
-//            if(Math.abs(ballWeight * xAccel) >= Math.abs(xN * uS)) {
-//                xVel += (xAccel * frameTime);
-//                float xS = metersToPixels((float) (xAccel * Math.pow(frameTime, 2) / 2 + xVel * frameTime));
-//                xPos -= xS;
-//            }
-//        } else {
-//            if(xVel > 0)
-//                xAccel -= ballWeight / (uK * xN);
-//            else
-//                xAccel += ballWeight / (uK * xN);
-//            xVel += (xAccel * frameTime);
-//            float xS = metersToPixels((float) (xAccel * Math.pow(frameTime, 2) / 2 + xVel * frameTime));
-//            xPos -= xS;
-//        }
-//
-//        if (xPos >= xMax) {
-//            xPos = xMax;
-//            xVel = 0;
-//        } else if (xPos <= 0) {
-//            xPos = 0;
-//            xVel = 0;
-//        }
-//
-//        if(yVel == 0) {
-//            if(Math.abs(ballWeight * yAccel) >= Math.abs(yN * uS)) {
-//                yVel += (yAccel * frameTime);
-//                float yS = metersToPixels((float) (yAccel * Math.pow(frameTime, 2) / 2 + yVel * frameTime));
-//                yPos -= yS;
-//            }
-//        } else {
-//            if(yVel > 0)
-//                yAccel -= ballWeight / (uK * yN);
-//            else
-//                yAccel += ballWeight / (uK * yN);
-//            yVel += (yAccel * frameTime);
-//            float yS = metersToPixels((float) (yAccel * Math.pow(frameTime, 2) / 2 + yVel * frameTime));
-//            yPos -= yS;
-//        }
-//
-//        if (yPos >= yMax) {
-//            yPos = yMax;
-//            yVel = 0;
-//        } else if (yPos <= 0) {
-//            yPos = 0;
-//            yVel = 0;
-//        }
-//        Log.d("POS", "----XPOS: " + xPos + "\t\tYPOS: " + yPos);
-//        Log.d("VEL", "----xVel" + xVel + "\t\tyVel: " + yVel);
-//        Log.d("ACC", "---x Accel: " + xAccel + "\t\tyAcc: " + yAccel);
-//    }
 }

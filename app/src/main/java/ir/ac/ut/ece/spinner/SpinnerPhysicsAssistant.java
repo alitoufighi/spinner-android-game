@@ -1,6 +1,7 @@
 package ir.ac.ut.ece.spinner;
 
 import android.hardware.SensorManager;
+import android.util.Log;
 
 public class SpinnerPhysicsAssistant {
     static final float ballMass = 0.01f;
@@ -40,13 +41,14 @@ public class SpinnerPhysicsAssistant {
     }
 
     public void updateBall(float dT, float xAccel, float yAccel){
+
         float xN = (float) (ballMass * gravity * Math.cos(xTheta));
         float yN = (float) (ballMass * gravity * Math.cos(yTheta));
 
         if(xVel == 0) {
             if(Math.abs(ballMass * xAccel) >= Math.abs(xN * uS)) {
                 xVel += (xAccel * dT);
-                float xS = metersToPixels((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT));
+                float xS = (float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT) * 250;
                 xPos -= xS;
             }
         } else {
@@ -55,7 +57,7 @@ public class SpinnerPhysicsAssistant {
             else
                 xAccel += ballMass / (uK * xN);
             xVel += (xAccel * dT);
-            float xS = metersToPixels((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT));
+            float xS = (float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT) * 250;
             xPos -= xS;
         }
 
@@ -70,7 +72,7 @@ public class SpinnerPhysicsAssistant {
         if(yVel == 0) {
             if(Math.abs(ballMass * yAccel) >= Math.abs(yN * uS)) {
                 yVel += (yAccel * dT);
-                float yS = metersToPixels((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT));
+                float yS = (float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT) * 250;
                 yPos -= yS;
             }
         } else {
@@ -79,7 +81,7 @@ public class SpinnerPhysicsAssistant {
             else
                 yAccel += ballMass / (uK * yN);
             yVel += (yAccel * dT);
-            float yS = metersToPixels((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT));
+            float yS = (float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT) * 250;
             yPos -= yS;
         }
 //        Log.d("ACC", "----xAcc: " + xAccel + "\t\tyAcc: " + yAccel);
@@ -94,5 +96,6 @@ public class SpinnerPhysicsAssistant {
             yPos = 0;
             yVel = 0;
         }
+
     }
 }

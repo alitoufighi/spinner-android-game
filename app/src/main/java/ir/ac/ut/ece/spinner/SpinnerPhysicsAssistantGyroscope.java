@@ -35,7 +35,7 @@ class SpinnerPhysicsAssistantGyroscope extends SpinnerPhysicsAssistant {
         if(xVel == 0) {
             if(Math.abs(ballMass * xAccel) >= Math.abs(xN * uS)) {
                 xVel += (xAccel * dT);
-                float xS =  ((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT));
+                float xS =  ((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT)) * 500;
                 xPos -= xS;
             }
         } else {
@@ -44,7 +44,7 @@ class SpinnerPhysicsAssistantGyroscope extends SpinnerPhysicsAssistant {
             else
                 xAccel += ballMass / (uK * xN);
             xVel += (xAccel * dT);
-            float xS = ((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT));
+            float xS = ((float) (xAccel * Math.pow(dT, 2) / 2 + xVel * dT)) * 500;
             xPos -= xS;
         }
 
@@ -59,7 +59,7 @@ class SpinnerPhysicsAssistantGyroscope extends SpinnerPhysicsAssistant {
         if(yVel == 0) {
             if(Math.abs(ballMass * yAccel) >= Math.abs(yN * uS)) {
                 yVel += (yAccel * dT);
-                float yS = ((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT));
+                float yS = ((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT)) * 500;
                 yPos -= yS;
             }
         } else {
@@ -68,7 +68,7 @@ class SpinnerPhysicsAssistantGyroscope extends SpinnerPhysicsAssistant {
             else
                 yAccel += ballMass / (uK * yN);
             yVel += (yAccel * dT);
-            float yS = ((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT));
+            float yS = ((float) (yAccel * Math.pow(dT, 2) / 2 + yVel * dT)) * 500;
             yPos -= yS;
         }
 //        Log.d("ACC", "----xAcc: " + xAccel + "\t\tyAcc: " + yAccel);
